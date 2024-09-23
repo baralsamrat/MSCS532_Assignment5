@@ -42,7 +42,17 @@ def performance_analysis(sort_function, arr):
     """
     Analyzes the performance of a sorting function.
 
+    Parameters:
+        sort_function (function): The sorting function to analyze.
+        arr (list): The list of elements to sort.
+
+    Returns:
+        float: The time taken to sort the array.
     """
+    start_time = time.time()
+    sort_function(arr)
+    end_time = time.time()
+    return end_time - start_time
 
 if __name__ == "__main__":
     # Testing the deterministic quicksort
@@ -55,3 +65,8 @@ if __name__ == "__main__":
     print("Sorted array (randomized):", sorted_array_randomized)
 
     # Testing  Performance
+    random_array = [random.randint(1, 1000) for _ in range(1000)]
+    deterministic_time = performance_analysis(quicksort, random_array.copy())
+    randomized_time = performance_analysis(randomized_quicksort, random_array.copy())
+    print(f"Deterministic Quicksort time: {deterministic_time:.6f} seconds")
+    print(f"Randomized Quicksort time: {randomized_time:.6f} seconds")
